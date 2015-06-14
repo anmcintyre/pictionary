@@ -3,7 +3,10 @@ var pictionary = function() {
     var socket = io();
     var isDrawing = false;
 
-
+    var displayGuess = function(guess){
+       $("#guesses").text(guess);
+    }
+  
     var draw = function(position) {
         context.beginPath();
         context.arc(position.x, position.y,
@@ -34,7 +37,23 @@ var pictionary = function() {
         }
     });
   
+    var guessBox;
+
+    var onKeyDown = function(event) {
+        if (event.keyCode != 13) { // Enter
+            return;
+        }
+
+        console.log(guessBox.val());
+        socket.emit("guess", guessBox.val());
+        guessBox.val('');
+    };
+
+    guessBox = $('#guess input');
+    guessBox.on('keydown', onKeyDown);  
+  
     socket.on("draw", draw);
+    socket.on("guess", displayGuess);
 };
 
 $(document).ready(function() {
