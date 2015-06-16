@@ -26,7 +26,7 @@ h1 {
     text-align: center;
     padding: 10px;
 }
-
+  
 canvas {
     width: 800px;
     height: 600px;
@@ -34,7 +34,13 @@ canvas {
     display: block;
     margin: 0 auto;
 }
+    
+#guess{
+    display: none;
+}
+  
 </style>
+
 
 <!-- JS -->
 <script src="//code.jquery.com/jquery-2.1.0.js"></script>
@@ -45,6 +51,8 @@ canvas {
 <div id="main">
     <h1>Pictionary</h1>
     <div id="top-message">
+        <div id="wordBox" >Word to draw: <span id="word"></span></div>
+        <div id="waiting">No guessers are connected.  Please wait for a guesser to join</div>
         <div id="guess">
             Make a guess: <input type="text" id="guessBox">
         </div>
